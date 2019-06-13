@@ -1,6 +1,7 @@
 package question4;
 
 import question1.Contributeur;
+import question1.*;
 import question1.GroupeDeContributeurs;
 import question2.*;
 import question3.*;
@@ -48,8 +49,40 @@ public class IHM extends JFrame {
             resultat.setText(Main.arbreXML(g)); //actualiser();
         }catch(Exception e){}
 
-        debiter.addActionListener(null/* a completer */);
-        crediter.addActionListener(null/* a completer */);
+        debiter.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int i = Integer.parseInt(IHM.this.somme.getText().toString());
+					g.debit(i);
+					resultat.setText(Main.arbreXML((Cotisant)IHM.this.g));
+				}
+				catch (NumberFormatException i) {
+				}
+				catch (SoldeDebiteurException i) {
+				}
+				catch (Exception i) {
+					// empty catch block
+				}
+			}
+		});
+        crediter.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int i = Integer.parseInt(IHM.this.somme.getText().toString());
+					g.credit(i);
+					resultat.setText(Main.arbreXML((Cotisant)IHM.this.g));
+				}
+				catch (NumberFormatException i) {
+				}
+				catch (SoldeDebiteurException i) {
+				}
+				catch (Exception i) {
+					// empty catch block
+				}
+			}
+		});
 
             
         this.pack();

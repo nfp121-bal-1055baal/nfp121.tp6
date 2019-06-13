@@ -1,61 +1,75 @@
+/*
+ * Decompiled with CFR 0.139.
+ * 
+ * Could not load the following classes:
+ *  junit.framework.TestCase
+ *  question1.Contributeur
+ *  question1.Cotisant
+ *  question1.GroupeDeContributeurs
+ *  question1.Visiteur
+ *  question2.SansDoublon
+ */
 package question2;
 
-import java.util.*;
-import question1.*;
+import junit.framework.TestCase;
+import question1.Contributeur;
+import question1.Cotisant;
+import question1.GroupeDeContributeurs;
+import question1.Visiteur;
+import question2.CompositeValide;
+import question2.DebitMaximal;
+import question2.SansDoublon;
 
-public class TestsDesVisiteurs extends junit.framework.TestCase{
-
-    public void testACompleter(){
-        fail(" cette méthode de tests, est à compléter, appels des trois visiteurs....");
+public class TestsDesVisiteurs
+extends TestCase {
+    public void testACompleter() {
+        TestsDesVisiteurs.fail((String)" cette m\u00c3\u00a9thode de tests, est \u00c3\u00a0 compl\u00c3\u00a9ter, appels des trois visiteurs....");
     }
 
-
-
-    public void testCompositeValide(){
-        try{
+    public void testCompositeValide() {
+        try {
             GroupeDeContributeurs g = new GroupeDeContributeurs("g");
-            assertFalse(" Ce composite n'est pas valide, revoyez CompositeValide !!!", g.accepter(new CompositeValide()));
-
+            TestsDesVisiteurs.assertFalse((String)" Ce composite n'est pas valide, revoyez CompositeValide !!!", (boolean)((Boolean)g.accepter((Visiteur)new CompositeValide())));
             GroupeDeContributeurs g1 = new GroupeDeContributeurs("g1");
-            g.ajouter(g1);
-            assertFalse(" Ce composite n'est pas valide, revoyez CompositeValide !!!", g.accepter(new CompositeValide()));
-
-            g1.ajouter(new Contributeur("c",100));
-            assertTrue(" Ce composite est valide, revoyez CompositeValide !!!", g.accepter(new CompositeValide()));
-
-        }catch(Exception e){
-            fail("exception inattendue !!! " + e.getMessage());
+            g.ajouter((Cotisant)g1);
+            TestsDesVisiteurs.assertFalse((String)" Ce composite n'est pas valide, revoyez CompositeValide !!!", (boolean)((Boolean)g.accepter((Visiteur)new CompositeValide())));
+            g1.ajouter((Cotisant)new Contributeur("c", 100));
+            TestsDesVisiteurs.assertTrue((String)" Ce composite est valide, revoyez CompositeValide !!!", (boolean)((Boolean)g.accepter((Visiteur)new CompositeValide())));
+        }
+        catch (Exception e) {
+            TestsDesVisiteurs.fail((String)("exception inattendue !!! " + e.getMessage()));
         }
     }
 
-    public void testTroisContributeursUnGroupe(){
-        try{
+    public void testTroisContributeursUnGroupe() {
+        try {
             GroupeDeContributeurs g = new GroupeDeContributeurs("g");
-            g.ajouter(new Contributeur("g_a",100));
-            g.ajouter(new Contributeur("g_b",200));
-            g.ajouter(new Contributeur("g_c",300));
-            assertTrue(" Ce composite est valide, revoyez CompositeValide !!!", g.accepter(new CompositeValide()));
-            assertEquals(" Revoyez DébitMaximal !!!", new Integer(100), g.accepter(new DebitMaximal()));
+            g.ajouter((Cotisant)new Contributeur("g_a", 100));
+            g.ajouter((Cotisant)new Contributeur("g_b", 200));
+            g.ajouter((Cotisant)new Contributeur("g_c", 300));
+            TestsDesVisiteurs.assertTrue((String)" Ce composite est valide, revoyez CompositeValide !!!", (boolean)((Boolean)g.accepter((Visiteur)new CompositeValide())));
+            TestsDesVisiteurs.assertEquals((String)" Revoyez D\u00c3\u00a9bitMaximal !!!", (Object)new Integer(100), (Object)g.accepter((Visiteur)new DebitMaximal()));
             GroupeDeContributeurs g1 = new GroupeDeContributeurs("g1");
-            g.ajouter(g1);
-            assertFalse(" Ce composite n'est pas valide, revoyez CompositeValide !!!", g1.accepter(new CompositeValide()));
-        }catch(Exception e){
-            fail("exception inattendue !!! " + e.getMessage());
+            g.ajouter((Cotisant)g1);
+            TestsDesVisiteurs.assertFalse((String)" Ce composite n'est pas valide, revoyez CompositeValide !!!", (boolean)((Boolean)g1.accepter((Visiteur)new CompositeValide())));
+        }
+        catch (Exception e) {
+            TestsDesVisiteurs.fail((String)("exception inattendue !!! " + e.getMessage()));
         }
     }
 
-    public void testUnContributeurUnGroupeAvecLeMemeNom(){
-        try{
+    public void testUnContributeurUnGroupeAvecLeMemeNom() {
+        try {
             GroupeDeContributeurs g = new GroupeDeContributeurs("g_a");
-            g.ajouter(new Contributeur("g_a",100));
-            g.ajouter(new Contributeur("g_b",200));
-            g.ajouter(new Contributeur("g_c",300));
-            g.ajouter(new Contributeur("g_d",80));
-            assertTrue(" Ce composite est valide, revoyez CompositeValide !!!", g.accepter(new CompositeValide()));
-            assertFalse(" Ce composite a au moins un doublon, revoyez SansDoublon !!!", g.accepter(new SansDoublon()));
-        }catch(Exception e){
-            fail("exception inattendue !!! " + e.getMessage());
+            g.ajouter((Cotisant)new Contributeur("g_a", 100));
+            g.ajouter((Cotisant)new Contributeur("g_b", 200));
+            g.ajouter((Cotisant)new Contributeur("g_c", 300));
+            g.ajouter((Cotisant)new Contributeur("g_d", 80));
+            TestsDesVisiteurs.assertTrue((String)" Ce composite est valide, revoyez CompositeValide !!!", (boolean)((Boolean)g.accepter((Visiteur)new CompositeValide())));
+            TestsDesVisiteurs.assertFalse((String)" Ce composite a au moins un doublon, revoyez SansDoublon !!!", (boolean)((Boolean)g.accepter((Visiteur)new SansDoublon())));
+        }
+        catch (Exception e) {
+            TestsDesVisiteurs.fail((String)("exception inattendue !!! " + e.getMessage()));
         }
     }
 }
-
